@@ -15,4 +15,6 @@ urlpatterns = [
     path("viewBook", viewBook.as_view(), name='viewBook'),
     path("viewCategories", viewCategories.as_view(), name='viewCategories'),
     path("info", info.as_view(), name='info'),
+    path("addBookMe", addBookMe.as_view(), name='addBookMe'),
+    path("deleteBookMe", deleteBookMe.as_view(), name='deleteBookMe'),
 ]

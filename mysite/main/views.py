@@ -57,7 +57,6 @@ class reg(View):
         return render(request, "main/reg/regForm.html", context=context)
 
     def post(self, request):
-
         user = RegForm(request.POST)
         if user.is_valid():
             user.save()
@@ -69,9 +68,12 @@ class reg(View):
 
 class profile(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
+            context['user'] = MyUsers.objects.get(
+                name=request.session['login'])
+            context['books'] = context['user'].books.all()
             return render(request, "main/profile.html", context=context)
         else:
             return HttpResponseRedirect("/")
@@ -79,15 +81,16 @@ class profile(View):
 
 class addbook(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
             context['form'] = BookForm
             return render(request, "main/addBookForm.html", context=context)
         else:
             return HttpResponseRedirect("/")
 
     def post(self, request):
+        context = {}
         user = BookForm(request.POST, request.FILES)
         if user.is_valid():
             user.save()
@@ -99,9 +102,9 @@ class addbook(View):
 
 class addcategories(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
             context['form'] = CategoriesForm
             return render(request, "main/addCategory.html", context=context)
         else:
@@ -119,9 +122,9 @@ class addcategories(View):
 
 class viewBook(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
             context['book'] = Book.objects.get(id=request.GET['id'])
 
             file_path = os.path.join(settings.MEDIA_ROOT,
@@ -135,9 +138,9 @@ class viewBook(View):
 
 class viewCategories(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
 
         context['categories'] = Categories.objects.all()
 
@@ -146,8 +149,38 @@ class viewCategories(View):
 
 class info(View):
     def get(self, request):
+        context = {}
         if 'login' in request.session:
-            context = {'user': MyUsers.objects.get(
-                name=request.session['login'])}
+            context['name'] = request.session['login']
 
         return render(request, "main/info.html", context=context)
+
+
+class addBookMe(View):
+    def get(self, request):
+        context = {}
+        if 'login' in request.session:
+            context['name'] = request.session['login']
+            user = MyUsers.objects.get(
+                name=request.session['login'])
+
+            book = Book.objects.get(id=request.GET['id'])
+            user.books.add(book)
+            # user.books
+
+        return HttpResponseRedirect("/")
+
+
+class deleteBookMe(View):
+    def get(self, request):
+        context = {}
+        if 'login' in request.session:
+            context['name'] = request.session['login']
+            user = MyUsers.objects.get(
+                name=request.session['login'])
+
+            book = Book.objects.get(id=request.GET['id'])
+            user.books.remove(book)
+            # user.books
+
+        return HttpResponseRedirect("/profile")

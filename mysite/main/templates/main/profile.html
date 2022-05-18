@@ -13,6 +13,7 @@
             <h4>Добавленные книги</h4>
             <div class="container">
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for i in books %}
                 <div class="col">
                   <div class="card shadow-sm">
                     <img
@@ -20,18 +21,19 @@
                       alt=""
                     />
                     <div class="card-body">
-                      <h5>Название книги</h5>
-                      <p class="card-text">Описание книги</p>
-                      <p>Автор книги</p>
+                      <h5>{{ i.name }}</h5>
+                      <p class="card-text">{{ i.description }}</p>
+                      {% comment %} <p>Автор книги</p> {% endcomment %}
                       <div
                         class="d-flex justify-content-between align-items-center"
                       >
-                        <button class="btn btn-success">Читать</button>
-                        <button class="btn btn-danger">Удалить</button>
+                        <a href="{% url 'viewBook' %}?id={{ i.id }}" class="btn btn-success">Читать</a>
+                        <a href="{% url 'deleteBookMe' %}?id={{ i.id }}" class="btn btn-danger">Удалить</a>
                       </div>
                     </div>
                   </div>
                 </div>
+                {% endfor %}
               </div>
             </div>
           </div>

@@ -20,6 +20,7 @@
               {% comment %} <p>Автор книги</p> {% endcomment %}
               <div class="d-flex justify-content-between align-items-center">
                 <a href="{% url 'viewBook' %}?id={{ i.id }}" class="btn btn-info">Перейти</a>
+                <a href="{% url 'addBookMe' %}?id={{ i.id }}" class="btn btn-success">+</a>
               </div>
             </div>
           </div>
