@@ -1,0 +1,27 @@
+{% extends 'base/index.html' %}
+
+{% block main %}
+<div id="auth">
+  <h1>Авторизация</h1>
+  <div class="auth-inputs">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-floating">
+        {% load myfilters %}
+        {{ form.name|addclass:'form-control'  }}
+        {{ form.name.label_tag }}
+      </div>
+      <div class="form-floating">
+        {{ form.password|addclass:'form-control'  }}
+        {{ form.password.label_tag }}
+      </div>
+      {{ form.error }}
+      <br />
+      <button class="btn btn-success">Войти</button>
+      <a href="{% url 'reg' %}" class="btn btn-outline-info">Нет аккаунта?</a>
+    </form>
+  </div>
+</div>
+
+{% endblock main %}
+   

@@ -1,0 +1,18 @@
+{% extends 'base/index.html' %}
+
+{% block main %}
+<div id="outer-container">
+  {% include 'base/header.html' %}
+  <div id="content">
+    <h1>{{ book }}</h1>
+    {% comment %} <div class="page-nav d-flex">
+      <button class="btn btn-success">Назад</button>
+      <p>Страница 1 из 1</p>
+      <button class="btn btn-success">Вперед</button>
+    </div> {% endcomment %}
+    <div class="container container-book-text">
+      {{ text }}
+    </div>
+  </div>
+</div>
+{% endblock main %}

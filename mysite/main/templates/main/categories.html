@@ -1,0 +1,49 @@
+{% extends 'base/index.html' %}
+{% block main %}
+<div id="outer-container">
+  {% include 'base/header.html' %}
+  <div id="content">
+    <h1>Категории</h1>
+    <input id="search" type="text" class="form-control" placeholder="Поиск..." style="width: 40%" /><br />
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for i in categories %}
+        <a class="cats" style="text-decoration: none; color: white;" href="{% url 'index' %}?id={{i.id}}">
+          <div class="col">
+            <div class="card shadow-sm">
+              <div id="categoryItem" class="card-body">
+                <h5>{{i.name}}</h5>
+              </div>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}
+
+{% block script %}
+<script>
+  let input = document.getElementById('search');
+  let list = document.getElementsByTagName('h5');
+  let list2 = document.getElementsByClassName('cats');
+  input.addEventListener('keyup', (e) => {
+    if (e.target.value.length > 0) {
+      for (let i = 0; i < list.length; i++) {
+        let isData = list[i].innerText.toLowerCase().indexOf(e.target.value.toLowerCase());
+        if (isData == -1)
+          list2[i].style.display = "none";
+        else
+          list2[i].style.display = "block";
+      }
+    }
+    else {
+      for (let i = 0; i < list2.length; i++) {
+        list2[i].style.display = "block";
+      }
+    }
+  });
+</script>
+{% endblock script %}

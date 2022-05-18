@@ -1,0 +1,63 @@
+body {
+    background: rgb(243, 243, 243);
+}
+
+#outer-container {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+#sidebar {
+    display: table-cell;
+    width: 15%;
+    vertical-align: top;
+    border-right: 3px solid #ccc;
+}
+
+#content {
+    display: table-cell;
+    width: 85%;
+    vertical-align: top;
+    height: 100vh;
+    padding: 10px;
+}
+
+#auth {
+    text-align: center;
+    margin-top: 150px;
+}
+
+#auth .form-floating {
+    margin: 0 auto;
+    width: 30%;
+}
+
+#auth input {
+    margin-top: 5px;
+}
+
+#auth button,
+a {
+    width: 150px;
+    margin-left: 2px;
+}
+
+#reg {
+    text-align: center;
+    margin-top: 150px;
+}
+
+#reg .form-floating {
+    margin: 0 auto;
+    width: 30%;
+}
+
+#reg input {
+    margin-top: 5px;
+}
+
+#reg button {
+    width: 200px;
+    margin-left: 2px;
+}

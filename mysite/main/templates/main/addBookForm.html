@@ -1,0 +1,50 @@
+{% extends 'base/index.html' %}
+
+{% block main %}
+    <div id="outer-container">
+      {% include "base/header.html" %}
+      <div id="content">
+        <h1>Опубликовать книгу</h1>
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <form method="post", enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-floating">
+                {% load myfilters %}
+                {{ form.name|addclass:'form-control'  }}
+                {{ form.name.label_tag }}
+              </div>
+              <div class="form-floating">
+                {{ form.year|addclass:'form-control'  }}
+                {{ form.year.label_tag }}
+              </div>
+              <div class="form-floating">
+                {{ form.rate|addclass:'form-control'  }}
+                {{ form.rate.label_tag }}
+              </div>
+              <div class="form-floating">
+                {{ form.pages|addclass:'form-control'  }}
+                {{ form.pages.label_tag }}
+              </div>
+              <div class="form-floating">
+                {{ form.description|addclass:'form-control'  }}
+                {{ form.description.label_tag }}
+              </div>
+              <div class="form-floating">
+                {{ form.categories  }}
+              </div>
+              <div class="form-floating">
+                {{ form.file  }}
+              </div>
+              <div class="form-floating">
+                {{ form.errors  }}
+              </div>
+              <br />
+              
+              <button type="submit" class="btn btn-success">Опубликовать</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock main %}
